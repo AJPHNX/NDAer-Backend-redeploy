@@ -28,8 +28,78 @@ app.use(cors());
 app.use('/docs', require('./controllers/docs'))
 app.use('/signers', require('./controllers/signers'))
 
+app.get('/*', (req, res) => {
+    // res.send('test');
+    // res.sendFile(path.join(__dirname, '../build', 'index.html'))
+    res.sendFile(path.join(__dirname, '../build', 'index.html'))
+})
+
+// app.use('/documents', require('../src/components/documents'))
+// app.use('/nda', require('../src/components/nda'))
+// app.use('/register', require('../src/components/register'))
+// app.use('/dashboard', require('../src/components/dashboard'))
+// app.use('/createDoc', require('../src/components/createDoc'))
+// app.use('/disc_view_doc', require('../src/components/disc_view_doc'))
+// app.use('/complete', require('../src/components/complete'))
+// app.use('/nda_complete', require('../src/components/nda_complete'))
+// app.use('/exit', require('../src/components/exit'))
+// app.use('/error', require('../src/components/error'))
+// app.use('/print', require('../src/components/print'))
+// app.use('/print', require('../src/components/signers'))
+
+
+// app.get('/documents', (req, res) => {
+//     // res.send('test');
+//     res.sendFile(path.join(__dirname, 'build', 'index.html'))
+//     res.redirect()
+// })
+// app.get('/nda', (req, res) => {
+//     // res.send('test');
+//     res.sendFile(path.join(__dirname, 'build', 'index.html'))
+// })
+// app.get('/register', (req, res) => {
+//     // res.send('test');
+//     res.sendFile(path.join(__dirname, 'build', 'index.html'))
+// })
+// app.get('/dashboard', (req, res) => {
+//     // res.send('test');
+//     res.sendFile(path.join(__dirname, 'build', 'index.html'))
+// })
+// app.get('/createDoc', (req, res) => {
+//     // res.send('test');
+//     res.sendFile(path.join(__dirname, 'build', 'index.html'))
+// })
+// app.get('/disc_view_doc', (req, res) => {
+//     // res.send('test');
+//     res.sendFile(path.join(__dirname, 'build', 'index.html'))
+// })
+// app.get('/complete', (req, res) => {
+//     // res.send('test');
+//     res.sendFile(path.join(__dirname, 'build', 'index.html'))
+// })
+// app.get('/nda_complete', (req, res) => {
+//     // res.send('test');
+//     res.sendFile(path.join(__dirname, 'build', 'index.html'))
+// })
+// app.get('/exit', (req, res) => {
+//     // res.send('test');
+//     res.sendFile(path.join(__dirname, 'build', 'index.html'))
+// })
+// app.get('/error', (req, res) => {
+//     // res.send('test');
+//     res.sendFile(path.join(__dirname, 'build', 'index.html'))
+// })
+// app.get('/print', (req, res) => {
+//     // res.send('test');
+//     res.sendFile(path.join(__dirname, 'build', 'index.html'))
+// })
 // app.get('/', (req, res) => {
-//     res.send('test');
+//     // res.send('test');
+//     res.sendFile(path.join(__dirname, 'build', 'index.html'))
+// })
+// app.get('*', (req, res) => {
+//     // res.send('test');
+//     res.sendFile(path.join(__dirname, 'src/components', 'error'))
 // })
 //!-----OLD CODE------
 // // GET: Fetch all signers from the database
@@ -74,5 +144,5 @@ app.use('/signers', require('./controllers/signers'))
                             // });
 //!-----OLD CODE------
 const port = process.env.PORT || 5005;
-
-app.listen(port, () => console.log(`Server running on port ${port}, http://localhost:${port}`));
+const URL = process.env.BASE_URL
+app.listen(port, () => console.log(`Server running on port ${port}, ${URL}:${port}`));
