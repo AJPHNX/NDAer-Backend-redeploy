@@ -31,7 +31,9 @@ app.use('/signers', require('./controllers/signers'))
 app.get('/*', (req, res) => {
     // res.send('test');
     // res.sendFile(path.join(__dirname, '../build', 'index.html'))
-    res.sendFile(path.join(__dirname, '../build', 'index.html'))
+    // res.sendFile(path.join(__dirname, '../build', 'index.html'))
+    // res.sendFile('index.html', {root: 'public'});
+    res.sendFile('index.html', {root: './'});
 })
 
 // app.use('/documents', require('../src/components/documents'))

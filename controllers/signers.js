@@ -6,10 +6,10 @@ require('dotenv').config();
 const db = knex({
     client: 'pg',
     connection: {
-        host: process.env.DATABASE_HOST,
-        user: process.env.DATABASE_USERNAME,
-        password: process.env.DATABASE_PASSWORD,
-        database: process.env.DATABASE
+        host: process.env.PROD_DATABASE_HOST,
+        user: process.env.PROD_DATABASE_USERNAME,
+        password: process.env.PROD_DATABASE_PASSWORD,
+        database: process.env.PROD_DATABASE
       },
     searchPath:['knex','public']
 });

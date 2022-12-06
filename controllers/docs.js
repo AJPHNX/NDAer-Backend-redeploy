@@ -13,7 +13,7 @@ const db = knex({
     client: 'pg',
     connection: {
         host: process.env.PROD_DATABASE_HOST,
-        user: process.env.POD_DATABASE_USERNAME,
+        user: process.env.PROD_DATABASE_USERNAME,
         password: process.env.PROD_DATABASE_PASSWORD,
         database: process.env.PROD_DATABASE
       },
