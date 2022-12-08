@@ -27,12 +27,11 @@ router.get('/', async (req, res) => {
         });
 });
 router.post('/add-signer', (req, res) => {
-    const {first_name, middle_name, last_name, suffix, alias, address, city,
-        state_or,zip,email, phone, signed, confirmed, openModal, timestamp, user_id, pass_id,doc_id} = req.body
+    const {first_name, middle_name, last_name, suffix, alias, address, city, state_or,zip,email, phone, signed, confirmed, openModal, timestamp, user_id, pass_id,doc_id} = req.body
         
     db('signers')
         .insert({
-            user_id,
+            // user_id,
             pass_id,
             first_name,
             middle_name,

@@ -108,8 +108,8 @@ router.put('/update-doc-signers/', (req, res) => {
     let doc_id = parseInt(req.query.id)
     const { name, disc_party, sign_party, type, status, state, county, duration,on_behalf, descr, subject,born_on, viewers,id } = req.body
    console.log("doc_id:", doc_id)
-   db('docs2')
-  .where({ 'id': doc_id  })
+   db("docs2")
+  .where({ "id": doc_id  })
   .update({ sign_party})
 //   .where("id",doc_id )
 //   .where(id.toString() == doc_id.toString() )
