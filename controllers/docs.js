@@ -87,12 +87,26 @@ router.get('/get-disc-docs/', async (req, res) => {
 router.get('/get-sign-docs/', async (req, res) => {
     let user = req.query.email
     db.select('*')
-    // .from(`docs`)// 
-    // .fromRaw(`"docs" WHERE '${user}'= ANY(sign_party)`) //original
-    // .fromRaw(`"docs" WHERE  sign_party =  "${user}"`)
     .from('docs2')
-    // !Kinda works with arrays .whereRaw('? = ANY(sign_party2)', username)
-    .where('sign_party', 'like',`%${user}%`)
+    .whereRaw(`'${user}' = ANY (sign_party)`)
+    // .join('doc_signers AS ds', 'ds.doc_id', 'd.id')
+    // .join('signers AS s', 's.doc_id','d.id')
+    // .join('doc_signer', 'doc_signer.id', 'doc_signer.sig_username')
+    // .select('doc2.id', 'signers.email', 'posts.contents')
+    // .where(`email`, '=', user)
+    // .where({sig_username : user},{id : doc_id})
+
+    // .join('docs2', 'doc2.id', 'docs2.id')
+    
+    // .join('signers', 'signers.doc_id', 'posts.user_id')
+    // .select('doc2.id', 'signers.email', 'posts.contents')
+    // .where({user_id: id})
+    //? ----Find all rows WHERE user in sign_party
+    //? ----Find all Docs WHERE the {signers.doc_id}
+    // .whereRaw(`"${user}" = FIND_IN_SET(sign_party)`)
+    
+    // .where(`%${user}% in sign_party`)
+   
     .timeout(2000)
     .then((data) => {
         console.log(`Getting signer docs for:`,{user})
@@ -104,14 +118,35 @@ router.get('/get-sign-docs/', async (req, res) => {
     });
 });
 
+router.put('/add-doc-signer/', (req, res) => {
+    let doc_id = parseInt(req.query.id)
+    const  s_username = req.body.sig_username
+    console.log("req.body", req.body)
+   console.log("doc_id:", doc_id)
+   console.log("username:", s_username)
+   db("doc_signers")
+    .insert({ 
+        doc_id : req.body,doc_id,
+        sig_username : s_username
+        })
+
+    .then(() => {
+        console.log(`Document #${doc_id} - added signer ${s_username}.`,);
+        return res.json({ msg: 'Doc Updated' });
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+  
+  });
 router.put('/update-doc-signers/', (req, res) => {
     let doc_id = parseInt(req.query.id)
     const { name, disc_party, sign_party, type, status, state, county, duration,on_behalf, descr, subject,born_on, viewers,id } = req.body
-   console.log("doc_id:", doc_id)
-   db("docs2")
-  .where({ "id": doc_id  })
-  .update({ sign_party})
-//   .where("id",doc_id )
+    console.log("doc_id:", doc_id)
+    db("docs2")
+    .where({ "id": doc_id  })
+    .update({ sign_party})
+    //   .where("id",doc_id )
 //   .where(id.toString() == doc_id.toString() )
 //   .where( Number(id) == Number(doc_id) )
     // .update({//req.body)

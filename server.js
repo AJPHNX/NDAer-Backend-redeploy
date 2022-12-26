@@ -27,6 +27,7 @@ app.use(cors());
 //Contorllers & Routes
 app.use('/docs', require('./controllers/docs'))
 app.use('/signers', require('./controllers/signers'))
+app.use('/viewers', require('./controllers/viewers'))
 
 app.get('/*', (req, res) => {
     // res.send('test');
